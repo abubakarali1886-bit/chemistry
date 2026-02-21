@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRYNOX42 - Complete Chemistry Form One Notes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .ai-badge {
+            background: #fdbb2d;
+            color: #1a2a6c;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+        
+        /* Hero */
+        .hero {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .hero h1 {
+            font-size: 36px;
+            color: #1a2a6c;
+            margin-bottom: 10px;
+        }
+        
+        .hero p {
+            color: #666;
+            font-size: 18px;
+        }
+        
+        .hero .source {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #888;
+            font-style: italic;
+        }
+        
+        /* Chapters Grid */
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .chapter-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-left: 5px solid #fdbb2d;
+        }
+        
+        .chapter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        
+        .chapter-number {
+            font-size: 14px;
+            color: #fdbb2d;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .chapter-card h3 {
+            font-size: 22px;
+            color: #1a2a6c;
+            margin-bottom: 10px;
+        }
+        
+        .chapter-card p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .topic-count {
+            display: inline-block;
+            background: #1a2a6c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            width: 95%;
+            max-width: 1300px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 20px 20px 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .modal-header h2 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .modal-header .chapter-info {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 22px;
+            transition: 0.3s;
+        }
+        
+        .modal-close:hover {
+            background: #fdbb2d;
+            transform: rotate(90deg);
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        /* Topic styles */
+        .topic {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #1a2a6c;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .topic h3 {
+            color: #1a2a6c;
+            font-size: 24px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #fdbb2d;
+            padding-bottom: 10px;
+        }
+        
+        .topic h4 {
+            color: #b21f1f;
+            margin: 20px 0 10px;
+            font-size: 20px;
+        }
+        
+        .topic h5 {
+            color: #1a2a6c;
+            margin: 15px 0 8px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .topic p {
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .topic ul, .topic ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        
+        .topic li {
+            margin: 8px 0;
+            color: #555;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+        
+        .topic li strong {
+            color: #1a2a6c;
+        }
+        
+        .definition-box {
+            background: #e3f2fd;
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid #2196f3;
+        }
+        
+        .definition-box strong {
+            color: #0b5e9e;
+            font-size: 18px;
+        }
+        
+        .example-box {
+            background: #fff3e0;
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid #ff9800;
+        }
+        
+        .example-box strong {
+            color: #c66900;
+            font-size: 18px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 25px 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: #1a2a6c;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+            color: #333;
+        }
+        
+        tr:hover td {
+            background: #f5f5f5;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .note-box {
+            background: #fff9e6;
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 1px solid #fdbb2d;
+        }
+        
+        .note-box strong {
+            color: #b21f1f;
+        }
+        
+        .warning-box {
+            background: #ffebee;
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid #f44336;
+        }
+        
+        .warning-box strong {
+            color: #b71c1c;
+        }
+        
+        .fire-triangle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+        }
+        
+        .fire-triangle pre {
+            font-family: monospace;
+            font-size: 16px;
+            color: #d32f2f;
+            background: #ffebee;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #d32f2f;
+        }
+        
+        .glossary-term {
+            font-weight: 600;
+            color: #1a2a6c;
+            background: #e8eaf6;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        
+        /* AI Button */
+        .ai-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 80px;
+            height: 80px;
+            background: #fdbb2d;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            border: 4px solid white;
+            z-index: 99;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .ai-button span {
+            font-size: 30px;
+        }
+        
+        .ai-button small {
+            font-size: 10px;
+            background: #1a2a6c;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+        
+        /* Revision section */
+        .revision-box {
+            background: #e0f2f1;
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid #009688;
+        }
+        
+        .revision-box h4 {
+            color: #00695c;
+        }
+        
+        .revision-box li {
+            color: #004d40;
+        }
+        
+        .glossary-box {
+            background: #f3e5f5;
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid #7b1fa2;
+        }
+        
+        .glossary-box h4 {
+            color: #4a148c;
+        }
+        
+        .glossary-box p {
+            margin-bottom: 10px;
+        }
+        
+        .glossary-box strong {
+            color: #7b1fa2;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .modal-header h2 {
+                font-size: 22px;
+            }
+            
+            .topic h3 {
+                font-size: 20px;
+            }
+            
+            .topic h4 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">🧪 KRYNOX42 CHEMISTRY</div>
+            <div class="ai-badge">Form One Complete Notes</div>
+        </div>
+        
+        <!-- Hero -->
+        <div class="hero">
+            <h1>Chemistry Form One Complete Notes</h1>
+            <p>Based on Tanzania Institute of Education (TIE) Student's Book</p>
+            <p class="source">Source: Tanzania Institute of Education (TIE) - Chemistry for Secondary Schools, Student's Book Form One (2023)</p>
+        </div>
+        
+        <!-- Chapters Grid -->
+        <div class="chapters-grid" id="chaptersGrid"></div>
+    </div>
+    
+    <!-- AI Button -->
+    <div class="ai-button" onclick="openAIChat()">
+        <span>🧪</span>
+        <small>KRYNOX42</small>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal" id="chapterModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Chapter Title</h2>
+                <div class="chapter-info" id="modalInfo"></div>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+    
+    <script>
+        // ===== COMPLETE CHEMISTRY FORM ONE NOTES =====
+        const chapters = [
+            {
+                id: 1,
+                title: "INTRODUCTION TO CHEMISTRY",
+                topics: [
+                    {
+                        number: "1.1",
+                        title: "Concept of Chemistry",
+                        content: `
+                            <div class="definition-box">
+                                <strong>Definition of Chemistry</strong><br>
+                                Chemistry is a branch of science that deals with the composition, structure and properties of matter, and the changes that matter undergoes.
+                            </div>
+                            
+                            <h4>What is Matter?</h4>
+                            <p>Matter is anything that has mass and occupies space. It includes the materials or substances of nature which make up our environment.</p>
+                            
+                            <h4>Branches of Chemistry</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>Branch</th><th>Description</th></tr>
+                                    <tr><td><strong>Analytical Chemistry</strong></td><td>Studies of instruments and methods used to separate, identify, and quantify chemical species in matter</td></tr>
+                                    <tr><td><strong>Inorganic Chemistry</strong></td><td>Deals with properties and behaviour of inorganic compounds</td></tr>
+                                    <tr><td><strong>Organic Chemistry</strong></td><td>Deals with properties and behaviour of organic compounds</td></tr>
+                                    <tr><td><strong>Physical Chemistry</strong></td><td>Concerned with the relations between the physical properties of substances and their chemical composition and transformations</td></tr>
+                                    <tr><td><strong>Chemical Engineering</strong></td><td>Deals with operations, designs and methods of improving production</td></tr>
+                                    <tr><td><strong>Biochemistry</strong></td><td>Deals with the study of chemical processes that occur in living things</td></tr>
+                                </table>
+                            </div>
+                            
+                            <h4>Who is a Chemist?</h4>
+                            <p>A chemist is a person who studies chemistry.</p>
+                            
+                            <h4>Scientific Skills Chemists Must Acquire:</h4>
+                            <ul>
+                                <li>Making thorough observations</li>
+                                <li>Recording accurately what has been observed</li>
+                                <li>Organising the observed and recorded information</li>
+                                <li>Repeating tests to ensure observations are accurate</li>
+                                <li>Drawing conclusion from observations</li>
+                                <li>Predicting possible outcomes of similar experiments</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        number: "1.2",
+                        title: "Relationships of Chemistry with Other Related Disciplines",
+                        content: `
+                            <h4>Importance of Studying Relationships:</h4>
+                            <ul>
+                                <li>Helps understand the world around us</li>
+                                <li>Gives insight to physical, chemical and biological processes</li>
+                                <li>Provides useful integrated skills</li>
+                                <li>Acts as a foundation for understanding scientific skills</li>
+                                <li>Helps understand different professions resulting from learning chemistry</li>
+                            </ul>
+                            
+                            <h4>Career Opportunities for Chemists:</h4>
+                            <p>Medical doctor, Pharmacist, Nurse, Chemical analyst, Laboratory technician, Laboratory scientist, Researcher, Chemical engineer, Teacher, Environmentalist</p>
+                            
+                            <h4>Employment Areas:</h4>
+                            <p>Hospitals, Pharmaceutical industries, Research centres, Testing laboratories, Schools, Energy sectors, Chemical industries, Food processing industries, Biotechnology firms, Other manufacturing industries</p>
+                            
+                            <h4>Relationships with Other Disciplines:</h4>
+                            
+                            <h5>1. Biology</h5>
+                            <ul>
+                                <li>Converge in biochemistry and biotechnology</li>
+                                <li>Biochemistry explores chemical processes within living organisms</li>
+                                <li>Biotechnology uses living organisms to produce economically useful products</li>
+                                <li>Resolves challenges in agriculture, medicine, nutrition and environmental science</li>
+                            </ul>
+                            
+                            <h5>2. Physics</h5>
+                            <ul>
+                                <li>Converge in physical chemistry</li>
+                                <li>Drives innovations in medical instruments, materials science and manufacturing</li>
+                            </ul>
+                            
+                            <h5>3. Agriculture</h5>
+                            <ul>
+                                <li>Converge in agro-chemistry</li>
+                                <li>Examines chemical processes related to plants, animals, soil health, crop protection and fertilisers</li>
+                                <li>Ensures food availability and security</li>
+                            </ul>
+                            
+                            <h5>4. Geology</h5>
+                            <ul>
+                                <li>Converge in geochemistry</li>
+                                <li>Applies chemistry theories in exploring chemical composition of Earth</li>
+                                <li>Investigates abundance and distribution of chemical elements in rocks and minerals</li>
+                                <li>Foundation of mining industry</li>
+                            </ul>
+                            
+                            <h5>5. Environmental Sciences</h5>
+                            <ul>
+                                <li>Converge in environmental chemistry and atmospheric chemistry</li>
+                                <li>Studies interactions of chemicals in the environment</li>
+                                <li>Examines pollution and impacts to the natural world</li>
+                            </ul>
+                            
+                            <h5>6. Mathematics</h5>
+                            <ul>
+                                <li>Applied in all areas of chemistry</li>
+                                <li>Used for: Analysis of chemical processes, Interpretation of experimental data through statistical analysis, Measuring mass, volume, temperature and concentration, Calculating percentage and ratios, Computational chemistry (simulating chemical processes)</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        number: "1.3",
+                        title: "Applications of Chemistry in Modern Society",
+                        content: `
+                            <h4>1. Agriculture</h4>
+                            <ul>
+                                <li><strong>Fertilisers:</strong> Used to improve the quality and quantity of crops. Made through chemical processes.</li>
+                                <li><strong>Pesticides:</strong> Used to destroy or control pests harmful to crops, animals or their products. Sprayed or sprinkled on crops.</li>
+                                <li><strong>Animal Dips:</strong> Used to kill pests such as ticks that attack animals.</li>
+                                <li><strong>Animal Vaccines:</strong> Used to protect animals against various infectious diseases. Important in preventing disease transmission between domesticated animals and humans.</li>
+                            </ul>
+                            
+                            <h4>2. Medicines</h4>
+                            <ul>
+                                <li>Chemically produced substances in forms of vaccines and medicines</li>
+                                <li>Used for prevention and treatment of diseases</li>
+                                <li>Found in medical stores and pharmacies</li>
+                            </ul>
+                            
+                            <h4>3. Nutrition and Cooking</h4>
+                            <ul>
+                                <li>Chemistry impacts tastes, textures and nutritional value of food</li>
+                                <li>Helps identify food components: Carbohydrates, Proteins, Fats and oils, Vitamins, Minerals</li>
+                                <li>Chemical reactions in cooking produce healthy and palatable foods</li>
+                                <li>Example: baked foods (bread, cakes, rock buns, biscuits)</li>
+                            </ul>
+                            
+                            <h4>4. Manufacturing Industries</h4>
+                            <p>Industries relying on chemical processes: Textile, Chemical, Paper, Food and beverage, Transport, Communication, Plastic manufacturing, Construction materials</p>
+                            <p>Products from chemical processes: Machine parts (metals, plastics, rubber), Cement, Plastic containers, Fabrics, Chemicals, Rubber, Paper</p>
+                            
+                            <h4>5. Food and Beverage Industries</h4>
+                            <ul>
+                                <li>Chemical preservatives: Common salt, Sodium nitrite, Citric acid, Sodium benzoate, Alcohol</li>
+                                <li>Benefits: Chemically preserved foods last longer than unpreserved foods</li>
+                            </ul>
+                            
+                            <h4>6. Transport</h4>
+                            <p>Chemically produced items: Fuels, Lubricants, Engines, Batteries, Tyres, Seals, Plastics, Paints, Coolants, Carpets, Seat covers</p>
+                            
+                            <h4>7. Communication and Technology</h4>
+                            <ul>
+                                <li>Development of batteries and electronic devices</li>
+                                <li>Transmission of data through networks</li>
+                                <li>Newspapers and magazines (paper and ink manufactured chemically)</li>
+                                <li>Telephones, radios, televisions, computers (wires, batteries, chemicals)</li>
+                            </ul>
+                            
+                            <h4>8. Home Care Products</h4>
+                            <p><strong>Definition:</strong> Chemically made materials used to clean the home and its surroundings</p>
+                            <p><strong>Examples:</strong> Soaps, Detergents, Disinfectants, Air fresheners, Polish</p>
+                            
+                            <h4>9. Cosmetics</h4>
+                            <p><strong>Definition:</strong> Chemically produced products used to improve physical appearance or odour</p>
+                            <p><strong>Examples:</strong> Deodorants, Lotions, Lipsticks, Face foundation creams</p>
+                            
+                            <div class="revision-box">
+                                <h4>Revision Exercise 1 (Key Questions)</h4>
+                                <ul>
+                                    <li><strong>Q:</strong> If a Form One Student aspires to be a professional farmer, which subjects should they focus on?<br><strong>A:</strong> Agriculture, chemistry and biology</li>
+                                    <li><strong>Q:</strong> Which term does not relate to any recognised branches of chemistry?<br><strong>A:</strong> Arithmetic chemistry</li>
+                                    <li><strong>Q:</strong> What are some of the main purposes of vaccines as chemical substances?<br><strong>A:</strong> Protect animals and human beings from diseases</li>
+                                    <li><strong>Q:</strong> Which term refers to a person with specialised knowledge in chemistry?<br><strong>A:</strong> Chemist</li>
+                                    <li><strong>Q:</strong> A person at home can apply chemistry in:<br><strong>A:</strong> Cooking food in a kitchen</li>
+                                </ul>
+                            </div>
+                        `
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "LABORATORY TECHNIQUES AND SAFETY",
+                topics: [
+                    {
+                        number: "2.1",
+                        title: "Laboratory Safety Measures",
+                        content: `
+                            <h4>What is a Laboratory?</h4>
+                            <p>A laboratory is a special room where chemistry experiments are carried out.</p>
+                            
+                            <h4>Importance of Safety in Laboratory:</h4>
+                            <ul>
+                                <li>Experiments involve delicate or complicated equipment</li>
+                                <li>Experiments involve harmful chemicals</li>
+                                <li>Need to prevent risks and protect people and environment</li>
+                            </ul>
+                            
+                            <h4>Laboratory Safety Measures:</h4>
+                            <ul>
+                                <li><strong>Fire Extinguishers:</strong> Working fire extinguishers fitted in accessible positions with clear instructions</li>
+                                <li><strong>Storage:</strong> Cupboards, storage cabinets and drawers should have locks to prevent accidental contact with harmful substances</li>
+                                <li><strong>Floors:</strong> Laboratory floors should not be polished to avoid slipperiness</li>
+                                <li><strong>Apparatus:</strong> All apparatus should be regularly checked to ensure they are safe for use</li>
+                                <li><strong>Protective Gear:</strong> All laboratory users should wear appropriate protective gears</li>
+                                <li><strong>Emergency Exits:</strong> Should be present, easy to access and use. Doors should open outward</li>
+                                <li><strong>Chemical Spills:</strong> There should be a manual on how to treat spills of different chemical substances</li>
+                                <li><strong>Gas Cylinders:</strong> Should be labelled, well stored and supported. Always in good working conditions</li>
+                                <li><strong>First Aid Kit:</strong> Each laboratory should contain a First Aid Kit with all necessary items</li>
+                                <li><strong>Refrigerators/Freezers:</strong> Should be labelled "For chemical use only" to avoid contamination. Clean and free of spills</li>
+                                <li><strong>Fume Chambers:</strong> Should be labelled and kept in good working conditions</li>
+                                <li><strong>Chemical Containers:</strong> Checked regularly to ensure no leaks. Secured stoppers or covers when not in use</li>
+                                <li><strong>Expired Chemicals:</strong> Stored chemicals regularly inspected to ensure no use of expired chemicals</li>
+                                <li><strong>Reactive Chemicals:</strong> Chemicals that can easily react with each other should never be stored together</li>
+                                <li><strong>Labelling:</strong> All chemical containers should be well-labelled to prevent accidental use of wrong substances</li>
+                                <li><strong>Monitoring Equipment:</strong> Smoke detectors installed to give alerts of possible dangers</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        number: "2.2",
+                        title: "Handling Chemicals Safely - Safety Signs",
+                        content: `
+                            <h4>Safety Signs on Chemical Containers</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>Symbol</th><th>Meaning</th><th>Description</th></tr>
+                                    <tr><td><strong>Corrosive</strong></td><td>Corrodes surfaces and human skin</td><td>Example: Nitric acid damages metals, clothes, skin</td></tr>
+                                    <tr><td><strong>Toxic</strong></td><td>Poisonous and can cause death</td><td></td></tr>
+                                    <tr><td><strong>Oxidant</strong></td><td>Readily gives off oxygen</td><td>May intensify fire and cause explosions</td></tr>
+                                    <tr><td><strong>Flammable/Inflammable</strong></td><td>Catches fire easily</td><td>Example: Petrol</td></tr>
+                                    <tr><td><strong>Explosive</strong></td><td>Blasts easily</td><td>Example: Detonators</td></tr>
+                                    <tr><td><strong>Caution</strong></td><td>Hazardous, can cause organ damage from short-term exposure</td><td></td></tr>
+                                    <tr><td><strong>Health Hazard</strong></td><td>Hazardous, can cause serious long-term health effects</td><td>Cancer, breathing difficulties, organ damage</td></tr>
+                                </table>
+                            </div>
+                        `
+                    },
+                    {
+                        number: "2.3",
+                        title: "Laboratory Rules",
+                        content: `
+                            <h4>Rules Before Practical Activities:</h4>
+                            <ul>
+                                <li>Do not enter the laboratory without the permission or presence of the teacher or laboratory technician</li>
+                                <li>Dress appropriately for laboratory activities:
+                                    <ul>
+                                        <li>Wear a laboratory coat</li>
+                                        <li>Wear safety goggles</li>
+                                        <li>Do not wear loose or floppy clothing</li>
+                                        <li>Tie back long hair</li>
+                                        <li>Roll up long sleeves</li>
+                                        <li>Do not wear shorts, sandals or walk barefooted</li>
+                                    </ul>
+                                </li>
+                                <li>Keep the windows open for proper ventilation</li>
+                                <li>Identify and note locations of all exits</li>
+                            </ul>
+                            
+                            <h4>Rules During Practical Activities:</h4>
+                            <ul>
+                                <li>Read the instructions carefully before you start any activity</li>
+                                <li>If you do not understand something, ask your teacher or the laboratory technician before proceeding</li>
+                                <li>Read the labels on chemical containers to be sure you have the right substance. Do not interchange labels</li>
+                                <li>Do not eat, drink, smoke, play or run in the laboratory</li>
+                                <li>Do not taste or smell a chemical or anything unless you have been instructed on how to do it</li>
+                                <li>Use a fume chamber when carrying out experiments which produce harmful gases and vapours</li>
+                                <li>Perform the intended experiments only. Do not set up your own experiments or interfere with someone's experiment</li>
+                                <li>Do not spill liquids on the floor</li>
+                                <li>Report any breakages or accidents to the teacher or laboratory technician immediately</li>
+                                <li>When heating substances in the test tube, direct the mouth of the test tube away from yourself and others. Do not point burners or hot substances towards yourself or other people</li>
+                                <li>Use a lighter or wooden splint to light burners. Do not use papers. Always strike the match before turning on the gas tap</li>
+                                <li>In case of a gas leakage, turn off all the gas taps and open the windows. Leave the room immediately</li>
+                                <li>Do not touch any electrical equipment with wet hands</li>
+                                <li>Do not use dirty, cracked or broken apparatus</li>
+                                <li>Turn off any gas or water taps that are not in use</li>
+                                <li>Do not remove any chemical or equipment from the laboratory without permission</li>
+                                <li>Replace covers and stoppers on the containers after using the chemicals</li>
+                                <li>Keep inflammable substances away from open flames</li>
+                                <li>Wash off any chemical spills on your skin or clothes with plenty of clean water</li>
+                            </ul>
+                            
+                            <h4>Rules After Practical Activities:</h4>
+                            <ul>
+                                <li>Appropriately dispose-off any wastes. Use the litter bins and not the sink to dispose any solid waste. Do not return unused chemicals to their original containers</li>
+                                <li>Do not pour concentrated chemicals into the sinks</li>
+                                <li>Clean up the equipment and store them safely</li>
+                                <li>Turn off gas and water taps</li>
+                                <li>Clean the working surfaces, benches and sinks</li>
+                                <li>Wash your hands with soap and running water</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        number: "2.4",
+                        title: "First Aid",
+                        content: `
+                            <div class="definition-box">
+                                <strong>Definition of First Aid</strong><br>
+                                First Aid is an immediate help given to a person who is sick or injured before a professional medical assistance is available.
+                            </div>
+                            
+                            <h4>Importance of First Aid:</h4>
+                            <ul>
+                                <li>Reduce the likelihood of death</li>
+                                <li>Shorten the recovery time</li>
+                                <li>Prevent permanent disability</li>
+                                <li>Reduce pain and suffering</li>
+                                <li>Prevent the victim's condition from getting worse</li>
+                            </ul>
+                            
+                            <h4>Causes of Accidents in the Laboratory:</h4>
+                            <ul>
+                                <li>Failure to follow the right procedure for experiments</li>
+                                <li>Spilled liquids left on the floor causing slipping and falling</li>
+                                <li>Chemical spills and exposure causing burns and damage to body parts</li>
+                                <li>Wrong use of equipment resulting in breakage and cuts</li>
+                                <li>Accidental swallowing of harmful chemicals</li>
+                                <li>Improper disposal of chemical wastes</li>
+                                <li>Poor ventilation causing poisoning and fainting</li>
+                                <li>Gas leakage from taps or cylinders leading to fires or explosions</li>
+                                <li>Use of wrong reagents due to wrong labelling or expired reagents</li>
+                                <li>Electric shock from electrical appliances</li>
+                                <li>Lack of adequate information on procedures and hazards</li>
+                                <li>Eating or drinking in the laboratory</li>
+                            </ul>
+                            
+                            <h4>First Aid Kit</h4>
+                            <p>A First Aid Kit is a box that contains items used to give help to a sick or injured person.</p>
+                            
+                            <h4>Components of First Aid Kit:</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>S/N</th><th>Item</th><th>Uses</th></tr>
+                                    <tr><td>1</td><td>First Aid Guide</td><td>Contains guidelines on how to use items</td></tr>
+                                    <tr><td>2</td><td>Plaster/Adhesive bandage</td><td>Covering small cuts or wounds</td></tr>
+                                    <tr><td>3</td><td>Antiseptic</td><td>Cleaning wounds and preventing infections</td></tr>
+                                    <tr><td>4</td><td>Scissors</td><td>Cutting bandages and clothing</td></tr>
+                                    <tr><td>5</td><td>Tweezers</td><td>Removing foreign objects</td></tr>
+                                    <tr><td>6</td><td>Safety pins</td><td>Fastening bandages</td></tr>
+                                    <tr><td>7</td><td>Gauze pads</td><td>Cleaning wounds</td></tr>
+                                    <tr><td>8</td><td>Bandage</td><td>Keeping dressings in place, immobilising injured limbs</td></tr>
+                                    <tr><td>9</td><td>Cotton wool</td><td>Cleaning and drying wounds</td></tr>
+                                    <tr><td>10</td><td>Clinical thermometer</td><td>Measuring body temperature</td></tr>
+                                    <tr><td>11</td><td>Disposable sterile gloves</td><td>Covering hands to avoid infecting wounds</td></tr>
+                                    <tr><td>12</td><td>Petroleum jelly</td><td>Smoothing dry, cracked and sore skin</td></tr>
+                                    <tr><td>13</td><td>Liniment</td><td>Reducing muscle pains</td></tr>
+                                    <tr><td>14</td><td>Torch</td><td>Source of light</td></tr>
+                                    <tr><td>15</td><td>Whistle</td><td>Blown to call for help</td></tr>
+                                    <tr><td>16</td><td>Painkiller</td><td>Relieving pain</td></tr>
+                                    <tr><td>17</td><td>Gentian violet</td><td>Treating fungal infections, serious heat burns</td></tr>
+                                    <tr><td>18</td><td>Iodine tincture</td><td>Preventing infections in fresh cuts, burns and scrapes</td></tr>
+                                </table>
+                            </div>
+                        `
+                    },
+                    {
+                        number: "2.5",
+                        title: "First Aid Procedures",
+                        content: `
+                            <h4>Suffocation</h4>
+                            <p><strong>Procedure:</strong></p>
+                            <ul>
+                                <li>Remove the cause if possible, or remove the victim from the cause</li>
+                                <li>Ensure victim's airways are open:
+                                    <ul>
+                                        <li>Place victim on back</li>
+                                        <li>With one hand on forehead and other on chin, tilt head backwards</li>
+                                    </ul>
+                                </li>
+                                <li>Blow air into airways using clean material (cloth or paper)</li>
+                                <li>Compress chest with both hands</li>
+                                <li>Keep victim warm using light blanket</li>
+                                <li>Take to nearby health care facility</li>
+                            </ul>
+                            
+                            <h4>Burns</h4>
+                            <p><strong>Definition:</strong> Injuries from body coming into contact with heat or harmful chemicals</p>
+                            <p><strong>Scalds:</strong> Burns caused by hot liquids or vapour</p>
+                            <p><strong>Procedure:</strong></p>
+                            <ul>
+                                <li>Lay victim down, protect burnt area from ground</li>
+                                <li>Gently pour cold water on burn for about 10 minutes</li>
+                                <li>Check breathing and pulse</li>
+                                <li>Gently remove jewellery, shoes or burnt clothing (not sticking to skin)</li>
+                                <li>Cover burn with sterile gauze, wrap loosely</li>
+                                <li>Give pain reliever</li>
+                                <li>Take to health care facility</li>
+                            </ul>
+                            <div class="warning-box">
+                                <strong>DON'TS:</strong>
+                                <ul>
+                                    <li>Do not use ice (further damages skin)</li>
+                                    <li>Do not apply ointment or butter</li>
+                                    <li>Do not break blisters (can cause infections)</li>
+                                </ul>
+                            </div>
+                            
+                            <h4>Choking</h4>
+                            <p><strong>Definition:</strong> Blockage of upper airways by food, drink or other objects</p>
+                            <p><strong>Procedure:</strong></p>
+                            <ul>
+                                <li>Encourage victim to cough up object</li>
+                                <li>If object remains stuck, give gentle taps between shoulder blades</li>
+                                <li>If still stuck, perform Heimlich manoeuvre:
+                                    <ul>
+                                        <li>Make person lean forward slightly, stand behind</li>
+                                        <li>Make fist with one hand, grasp with other near top of stomach</li>
+                                        <li>Press fist into abdomen with quick upward thrusts</li>
+                                        <li>Repeat until object comes out</li>
+                                    </ul>
+                                </li>
+                                <li>Take to health care facility</li>
+                            </ul>
+                            
+                            <h4>Electric Shock</h4>
+                            <p><strong>Definition:</strong> Occurs when person comes into contact with electric current</p>
+                            <p><strong>Procedure:</strong></p>
+                            <ul>
+                                <li>Break contact: switch off power source</li>
+                                <li>If cannot switch off, move person with dry non-conducting material (cardboard, plastic, wood)</li>
+                                <li>If immediate danger (severe burns, muscle pain, difficulty breathing), call professional help</li>
+                                <li>If unconscious, check pulse and breathing</li>
+                                <li>Administer First Aid for burns, shock or other injuries</li>
+                                <li>Take to health care facility</li>
+                            </ul>
+                            <div class="warning-box">
+                                <strong>CAUTION:</strong> Do not touch person still in contact with electric current
+                            </div>
+                            
+                            <h4>Poisoning</h4>
+                            <p><strong>Definition:</strong> Any substance that can harm body if swallowed, inhaled or absorbed through skin</p>
+                            <p><strong>Procedure:</strong></p>
+                            <ul>
+                                <li>Call medical assistance immediately</li>
+                                <li>Find out cause of poisoning</li>
+                                <li>If in eye: wash with clean water, blink, do not rub</li>
+                                <li>If on skin: remove clothing, wash with plenty of water (no ointment)</li>
+                                <li>If swallowed:
+                                    <ul>
+                                        <li>Induce vomiting if non-corrosive (e.g., medicines)</li>
+                                        <li>Do NOT induce vomiting if corrosive (acids, alkalis, oils, petrol)</li>
+                                    </ul>
+                                </li>
+                                <li>If inhaled: move to fresh air (protect yourself)</li>
+                                <li>Take to health care facility</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        number: "2.6",
+                        title: "Basic Chemistry Laboratory Apparatus",
+                        content: `
+                            <h4>Apparatus for Measuring</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>Apparatus</th><th>Description</th><th>Uses</th></tr>
+                                    <tr><td>Pipette</td><td>Narrow glass tube</td><td>Measure specific volume of liquids</td></tr>
+                                    <tr><td>Measuring cylinder</td><td>Glass/plastic graduated cylinder</td><td>Measure volume of liquids</td></tr>
+                                    <tr><td>Beaker</td><td>Cylindrical, flat bottom, glass/plastic</td><td>Measuring (estimate), heating (glass), mixing, stirring, transferring, dissolving</td></tr>
+                                    <tr><td>Burette</td><td>Graduated tube with tap</td><td>Accurately measure and dispense known volumes (titration)</td></tr>
+                                    <tr><td>Measuring syringe</td><td>Syringe with graduations</td><td>Measure volumes of liquids or gases</td></tr>
+                                    <tr><td>Thermometer</td><td>Instrument with temperature scale</td><td>Measure and indicate temperature</td></tr>
+                                    <tr><td>Triple beam balance</td><td>Balance with three beams and weights</td><td>Measure mass of substances</td></tr>
+                                </table>
+                            </div>
+                            
+                            <h4>Apparatus for Testing</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>Apparatus</th><th>Description</th><th>Uses</th></tr>
+                                    <tr><td>Test tube</td><td>Small glass tube</td><td>Holding chemicals, heating, testing reactions</td></tr>
+                                    <tr><td>Dropper</td><td>Glass tube with rubber bulb</td><td>Add liquids drop by drop</td></tr>
+                                    <tr><td>Volumetric flask</td><td>Flask with precise volume mark</td><td>Measuring and holding liquids</td></tr>
+                                    <tr><td>Conical flask</td><td>Cone-shaped flask</td><td>Measuring and holding liquids</td></tr>
+                                    <tr><td>Gas jar</td><td>Glass container</td><td>Collecting and testing gases</td></tr>
+                                </table>
+                            </div>
+                            
+                            <h4>Apparatus for Heating</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>Apparatus</th><th>Description</th><th>Uses</th></tr>
+                                    <tr><td>Bunsen burner</td><td>Gas burner with adjustable air holes</td><td>Source of heat</td></tr>
+                                    <tr><td>Spirit lamp</td><td>Lamp burning spirit</td><td>Source of heat</td></tr>
+                                    <tr><td>Boiling tube</td><td>Hard, large test tube</td><td>Heat substances strongly, contain larger amounts</td></tr>
+                                    <tr><td>Crucible</td><td>Porcelain container with lid</td><td>Heat substances to very high temperatures</td></tr>
+                                    <tr><td>Evaporating dish</td><td>Shallow porcelain bowl</td><td>Heat and evaporate liquids and solutions</td></tr>
+                                </table>
+                            </div>
+                            
+                            <h4>Apparatus for Safety</h4>
+                            <ul>
+                                <li><strong>Safety goggles</strong> - Protect eyes from chemical spills, strong light, harmful vapour</li>
+                                <li><strong>Laboratory coat</strong> - Protect clothing and skin from chemical spills</li>
+                                <li><strong>Gloves</strong> - Protect hands from hazardous chemicals</li>
+                                <li><strong>Face masks</strong> - Protect against airborne particles, gases and fumes</li>
+                            </ul>
+                        `
+                    }
+                ]
+            },
+            {
+                id: 3,
+                title: "FIRE, FIREFIGHTING AND FLAMES",
+                topics: [
+                    {
+                        number: "3.1",
+                        title: "Fire",
+                        content: `
+                            <div class="definition-box">
+                                <strong>Definition of Fire</strong><br>
+                                Fire is the state at which an ignited material combines with oxygen and gives off light, heat, flame and combustion products.
+                            </div>
+                            
+                            <h4>Benefits of Controlled Fire:</h4>
+                            <ul>
+                                <li>Cooking</li>
+                                <li>Heating</li>
+                                <li>Industrial processes</li>
+                            </ul>
+                            
+                            <h4>Fire Triangle</h4>
+                            <p>The three components needed to start fire:</p>
+                            <div class="fire-triangle">
+                                <pre>
+        HEAT
+         /\\
+        /  \\
+       /    \\
+      /      \\
+     /        \\
+    /__________\\
+  FUEL          OXYGEN
+                                </pre>
+                            </div>
+                            <p>If any component is missing, no fire will start or continue burning.</p>
+                            
+                            <h4>Examples of Fuels:</h4>
+                            <p>Wood, Charcoal, Natural gas, Kerosene, Petrol, Diesel, Coal</p>
+                        `
+                    },
+                    {
+                        number: "3.2",
+                        title: "Firefighting",
+                        content: `
+                            <div class="definition-box">
+                                <strong>Definition</strong><br>
+                                Firefighting is the act of extinguishing fires and mitigating their effects.
+                            </div>
+                            
+                            <h4>Principle</h4>
+                            <p>Firefighting involves eliminating at least one of the three components in the fire triangle.</p>
+                            
+                            <h4>Classification of Fires</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>Class</th><th>Burning Materials</th><th>Appropriate Extinguishers</th></tr>
+                                    <tr><td>A</td><td>Ordinary solid combustible materials (paper, wood, clothing)</td><td>Water, any portable extinguisher except CO₂</td></tr>
+                                    <tr><td>B</td><td>Flammable liquids (petrol, alcohol, kerosene, oil-based paints)</td><td>Small: fire blanket/sand; Large: dry powder, foam, CO₂</td></tr>
+                                    <tr><td>C</td><td>Flammable gases (butane, propane)</td><td>Dry powder, CO₂</td></tr>
+                                    <tr><td>D</td><td>Combustible metals (magnesium, sodium, lithium)</td><td>Dry powder, foam</td></tr>
+                                    <tr><td>F</td><td>Cooking oils and fats</td><td>Wet chemical</td></tr>
+                                </table>
+                            </div>
+                            
+                            <h4>Electrical Fires</h4>
+                            <ul>
+                                <li>Not given own class</li>
+                                <li>Electricity is source but surrounding material burns</li>
+                                <li>Use: dry powder, CO₂, dry sand</li>
+                                <li>Turn off main electrical switch first</li>
+                            </ul>
+                            
+                            <h4>Portable Fire Extinguishers</h4>
+                            <p><strong>Definition:</strong> Equipment used to put out fire, easily moved from place to place</p>
+                            
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>Type</th><th>Chemical Composition</th><th>Suitable For</th><th>Not Suitable For</th></tr>
+                                    <tr><td>Air Pressurised Water (APW)</td><td>Ordinary tap water pressurized by air</td><td>Class A</td><td>Classes B, C, D</td></tr>
+                                    <tr><td>Dry Chemical (DC)</td><td>Fine sodium bicarbonate powder + nitrogen</td><td>Classes A, B, C</td><td>Aircraft, electronics (corrosive)</td></tr>
+                                    <tr><td>Carbon Dioxide</td><td>CO₂ gas under extreme high pressure</td><td>Classes B, C, electrical</td><td>Class A (can re-ignite)</td></tr>
+                                    <tr><td>Foam</td><td>Proteins and fluoro-proteins</td><td>Classes A, B</td><td>Electrical faults</td></tr>
+                                    <tr><td>ABC</td><td>Monoammonium phosphate + nitrogen</td><td>Classes A, B, C</td><td>Electronic equipment</td></tr>
+                                </table>
+                            </div>
+                            
+                            <h4>How to Use a Portable Fire Extinguisher</h4>
+                            <ol>
+                                <li>Remove the safety pin</li>
+                                <li>Hold the discharge hose and focus at the base of the fire</li>
+                                <li>Squeeze the top lever to release the extinguishing agent</li>
+                                <li>Sweep from side to side until the fire is extinguished</li>
+                            </ol>
+                            
+                            <h4>Precautions When Using Fire Extinguishers:</h4>
+                            <ul>
+                                <li>Keep a reasonable distance (at least 1.5 metres) from the fire</li>
+                                <li>For a person on fire, use a fire blanket instead of extinguisher</li>
+                                <li>Do not test extinguisher without permission</li>
+                                <li>Do not return used extinguisher to its place</li>
+                                <li>Do not hold discharge horn of CO₂ extinguisher (extremely cold - frost burns)</li>
+                                <li>If fire gets out of control, abandon and notify fire brigade</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        number: "3.3",
+                        title: "Flames",
+                        content: `
+                            <div class="definition-box">
+                                <strong>Definition of Flame</strong><br>
+                                A flame is a zone or region of burning gases that produces heat and light. It is the visible glowing part of fire.
+                            </div>
+                            
+                            <h4>Factors Affecting Flame:</h4>
+                            <ul>
+                                <li>Type of fuel used</li>
+                                <li>Source of the flame</li>
+                                <li>Oxygen supply</li>
+                            </ul>
+                            
+                            <h4>Types of Flames</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>Feature</th><th>Luminous Flame</th><th>Non-luminous Flame</th></tr>
+                                    <tr><td>Colour</td><td>Bright yellow</td><td>Blue</td></tr>
+                                    <tr><td>Oxygen supply</td><td>Limited/not enough</td><td>Sufficient</td></tr>
+                                    <tr><td>Soot</td><td>Produces soot</td><td>No soot</td></tr>
+                                    <tr><td>Heat</td><td>Less hot</td><td>More hot</td></tr>
+                                    <tr><td>Sound</td><td>Quiet</td><td>Noisy</td></tr>
+                                    <tr><td>Visibility</td><td>Easily seen (safety flame)</td><td>Less visible</td></tr>
+                                    <tr><td>Parts</td><td>Four parts</td><td>Three parts</td></tr>
+                                </table>
+                            </div>
+                            
+                            <h4>Parts of Luminous Flame</h4>
+                            <ul>
+                                <li>Thin outer zone</li>
+                                <li>Yellow middle zone</li>
+                                <li>Inner unburnt zone</li>
+                                <li>Blue outer zone</li>
+                            </ul>
+                            
+                            <h4>Parts of Non-luminous Flame</h4>
+                            <ul>
+                                <li>Colourless inner zone - region of unburnt gas</li>
+                                <li>Blue-green middle zone - part of gas burns, hottest part at tip</li>
+                                <li>Pale purple-blue outer zone - complete burning of gas</li>
+                            </ul>
+                            
+                            <h4>Uses of Luminous Flame</h4>
+                            <p>Mainly for lighting (bright, safer for lighting). Not very hot, safer than non-luminous for lighting.</p>
+                            
+                            <h4>Uses of Non-luminous Flame</h4>
+                            <ul>
+                                <li>Heating purposes in laboratory (most heating uses non-luminous)</li>
+                                <li>Flame test of chemical substances:
+                                    <ul>
+                                        <li>Sodium produces yellow flame</li>
+                                        <li>Calcium produces brick red flame</li>
+                                    </ul>
+                                </li>
+                                <li>Welding (very hot) - joining metal pieces</li>
+                                <li>Cooking (enough heat, no soot)</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        number: "3.4",
+                        title: "Bunsen Burner",
+                        content: `
+                            <div class="definition-box">
+                                <strong>Definition</strong><br>
+                                A Bunsen burner is a laboratory heat source consisting of a vertical metal tube connected to a gas source.
+                            </div>
+                            
+                            <h4>History</h4>
+                            <p>Named after German chemist Robert Bunsen who invented it in 1855.</p>
+                            
+                            <h4>Parts of Bunsen Burner</h4>
+                            <ul>
+                                <li><strong>Barrel/Chimney</strong> - vertical metal tube</li>
+                                <li><strong>Collar</strong> - for adjusting air holes</li>
+                                <li><strong>Jet</strong> - where gas enters</li>
+                                <li><strong>Gas inlet</strong> - connection to gas source</li>
+                                <li><strong>Base</strong> - supports the burner</li>
+                            </ul>
+                            
+                            <h4>Temperature</h4>
+                            <p>Up to 1000°C from mixture of gas and air</p>
+                            
+                            <h4>How Bunsen Burner Works</h4>
+                            <ul>
+                                <li>Gas enters through tube connected to jet inside base</li>
+                                <li>Air enters through adjustable air holes</li>
+                                <li>Amount of air varied by turning collar</li>
+                                <li>Mixture burns at top of barrel</li>
+                                <li>Type of flame depends on oxygen available</li>
+                            </ul>
+                            
+                            <h4>Air Hole Settings and Flame Types</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>Air Holes</th><th>Oxygen Supply</th><th>Flame Type</th></tr>
+                                    <tr><td>Closed</td><td>Less oxygen</td><td>Luminous flame</td></tr>
+                                    <tr><td>Partly open</td><td>More oxygen</td><td>Medium flame</td></tr>
+                                    <tr><td>Fully open</td><td>Enough oxygen</td><td>Non-luminous flame</td></tr>
+                                </table>
+                            </div>
+                            
+                            <h4>Striking Back (Burning Back)</h4>
+                            <p><strong>Definition:</strong> Event when gas burns at the jet</p>
+                            <p><strong>Occurs when:</strong> Lighting burner with air holes open</p>
+                            <p><strong>Correction:</strong> Turn off gas supply, then relight burner</p>
+                        `
+                    }
+                ]
+            },
+            {
+                id: 4,
+                title: "MATTER",
+                topics: [
+                    {
+                        number: "4.1",
+                        title: "States of Matter",
+                        content: `
+                            <div class="definition-box">
+                                <strong>Definition of Matter</strong><br>
+                                Matter is anything that has mass and occupies space.
+                            </div>
+                            
+                            <h4>Four States of Matter</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>State</th><th>Description</th><th>Examples</th><th>Particle Behavior</th></tr>
+                                    <tr><td><strong>Solid</strong></td><td>Definite shape and volume, usually hard, not easily deformed</td><td>Stones, firewood, cooking pots, pencils, chalks, sand, charcoal</td><td>Particles packed closely together, only vibrate</td></tr>
+                                    <tr><td><strong>Liquid</strong></td><td>Flows easily, fixed volume, takes shape of container</td><td>Juice, milk, water</td><td>Particles close together but can move/slide past each other</td></tr>
+                                    <tr><td><strong>Gas</strong></td><td>No definite shape or volume, flows and expands indefinitely to occupy space</td><td>Oxygen, hydrogen, carbon dioxide, chlorine, air</td><td>Particles far apart, no regular order</td></tr>
+                                    <tr><td><strong>Plasma</strong></td><td>Occurs when gas extremely heated, mixture of positively charged ions and free electrons</td><td>Stars, lightning, plasma televisions</td><td>Charged particles, less dense, no fixed shape/volume</td></tr>
+                                </table>
+                            </div>
+                        `
+                    },
+                    {
+                        number: "4.2",
+                        title: "Changes in States of Matter",
+                        content: `
+                            <h4>Processes of Change</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>Process</th><th>Change</th><th>Description</th></tr>
+                                    <tr><td><strong>Melting</strong></td><td>Solid → Liquid</td><td>Particles gain energy, vibrate fast, break free from fixed positions</td></tr>
+                                    <tr><td><strong>Freezing</strong></td><td>Liquid → Solid</td><td>Particles lose energy, come together</td></tr>
+                                    <tr><td><strong>Vapourisation</strong></td><td>Liquid → Vapour</td><td>Particles gain energy, escape into air</td></tr>
+                                    <tr><td><strong>Condensation</strong></td><td>Vapour → Liquid</td><td>Particles lose energy, come closer</td></tr>
+                                    <tr><td><strong>Ionisation</strong></td><td>Gas → Plasma</td><td>Very high temperature, atoms lose electrons</td></tr>
+                                    <tr><td><strong>Deionisation</strong></td><td>Plasma → Gas</td><td>Cooling, ions gain electrons, form atoms</td></tr>
+                                    <tr><td><strong>Sublimation</strong></td><td>Solid → Gas</td><td>Direct change, bypassing liquid state (e.g., iodine)</td></tr>
+                                    <tr><td><strong>Deposition</strong></td><td>Gas → Solid</td><td>Direct change, bypassing liquid state</td></tr>
+                                </table>
+                            </div>
+                            
+                            <h4>Key Definitions</h4>
+                            <ul>
+                                <li><strong>Melting point:</strong> Temperature at which solid changes to liquid at standard atmospheric pressure</li>
+                                <li><strong>Freezing point:</strong> Temperature at which liquid changes to solid</li>
+                                <li><strong>Boiling point:</strong> Temperature at which vapour pressure of liquid equals atmospheric pressure</li>
+                            </ul>
+                            
+                            <h4>Example: Water</h4>
+                            <ul>
+                                <li>Below 0°C → Solid (ice)</li>
+                                <li>0°C to 100°C → Liquid (water)</li>
+                                <li>100°C → Vapour (steam)</li>
+                                <li>Extremely high temperature → Plasma</li>
+                            </ul>
+                            
+                            <h4>Importance of Changes in States of Matter</h4>
+                            <ol>
+                                <li><strong>Water Cycle:</strong> Continuous process driving water movement on, above, and below Earth's surface. Water changes from liquid to vapour, vapour to clouds, clouds to rain.</li>
+                                <li><strong>Refrigeration:</strong> Refrigerants change state. Change from liquid to vapour absorbs energy, causing cooling effect. Air conditioners work on same principle.</li>
+                                <li><strong>Refinery and Distillery:</strong> Liquids change to vapour, then cooled back to liquid. Simple distillation in distilleries. Fractional distillation in petroleum refineries.</li>
+                                <li><strong>Metallurgy:</strong> Extraction and purification of metals from ores. Manufacture of alloys. Changes from solid to liquid and back to solid.</li>
+                                <li><strong>Steam Engines:</strong> Steam as working fluid to perform work. Used in early trains and ships. Change from liquid water to steam.</li>
+                                <li><strong>Drying of Materials:</strong> Liquid contained changes to vapour. Example: wet clothes drying in sun.</li>
+                                <li><strong>Production of Electricity:</strong> Coal heats water in closed pipes to vapour. Vapour drives turbines that produce electricity.</li>
+                            </ol>
+                        `
+                    },
+                    {
+                        number: "4.3",
+                        title: "Particulate Nature of Matter",
+                        content: `
+                            <h4>Brownian Motion</h4>
+                            <p><strong>Discovery:</strong></p>
+                            <ul>
+                                <li>1827 by botanist Robert Brown</li>
+                                <li>Observed pollen grains in water moving in irregular zigzag manner</li>
+                            </ul>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Pollen grains constantly bombarded by water particles</li>
+                                <li>Shows matter is particulate in nature</li>
+                            </ul>
+                            
+                            <h4>Other Examples Showing Particulate Nature:</h4>
+                            <ul>
+                                <li>Spread of smell of food being cooked from kitchen</li>
+                                <li>Diffusion of potassium permanganate in water</li>
+                                <li>Spread of perfume vapours into air</li>
+                            </ul>
+                            
+                            <h4>Diffusion</h4>
+                            <p><strong>Definition:</strong> Movement of particles from an area of high concentration to area of low concentration</p>
+                            
+                            <h4>Kinetic Molecular Behaviour</h4>
+                            <p>The way particles behave in solids, liquids and gases</p>
+                            
+                            <h4>Summary of Properties</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>Property</th><th>Solid</th><th>Liquid</th><th>Gas</th><th>Plasma</th></tr>
+                                    <tr><td>Shape</td><td>Retains fixed shape</td><td>Takes shape of container</td><td>No definite shape</td><td>No definite shape</td></tr>
+                                    <tr><td>Volume</td><td>Fixed volume</td><td>Fixed volume</td><td>Takes volume of container</td><td>Takes volume of container</td></tr>
+                                    <tr><td>Movement of particles</td><td>Only vibrate</td><td>Move or slide past each other</td><td>Move rapidly</td><td>Highly energetic charged particles</td></tr>
+                                    <tr><td>Compressibility</td><td>Cannot be compressed</td><td>Cannot be compressed</td><td>Compressible</td><td></td></tr>
+                                </table>
+                            </div>
+                        `
+                    },
+                    {
+                        number: "4.4",
+                        title: "Physical and Chemical Changes",
+                        content: `
+                            <h4>Physical Changes</h4>
+                            <p><strong>Definition:</strong> Changes that affect only physical properties of matter</p>
+                            <p><strong>Characteristics:</strong></p>
+                            <ul>
+                                <li>Temporary changes</li>
+                                <li>Reversible (original substance can be recovered)</li>
+                                <li>No new substance formed</li>
+                                <li>Molecules rearranged but actual composition remains same</li>
+                                <li>No energy produced or absorbed</li>
+                            </ul>
+                            <p><strong>Examples:</strong></p>
+                            <ul>
+                                <li>Melting of ice</li>
+                                <li>Dissolving sugar in water</li>
+                                <li>Cutting paper</li>
+                                <li>Boiling water</li>
+                                <li>Magnetising iron</li>
+                            </ul>
+                            
+                            <h4>Chemical Changes</h4>
+                            <p><strong>Definition:</strong> Changes that affect both physical and chemical properties of matter</p>
+                            <p><strong>Characteristics:</strong></p>
+                            <ul>
+                                <li>Permanent changes</li>
+                                <li>Irreversible (original substance cannot be recovered)</li>
+                                <li>New substances formed</li>
+                                <li>Molecular compositions completely change</li>
+                                <li>Energy produced or absorbed</li>
+                            </ul>
+                            <p><strong>Examples:</strong></p>
+                            <ul>
+                                <li>Burning of wood</li>
+                                <li>Rusting of iron</li>
+                                <li>Digestion of food</li>
+                                <li>Cooking food</li>
+                                <li>Decaying of teeth</li>
+                                <li>Rotting of mangoes</li>
+                            </ul>
+                            
+                            <h4>Rusting</h4>
+                            <p><strong>Definition:</strong> Chemical change on surface of iron forming reddish-brown coating called rust</p>
+                            <p><strong>Conditions Necessary:</strong></p>
+                            <ul>
+                                <li>Iron</li>
+                                <li>Oxygen</li>
+                                <li>Water</li>
+                            </ul>
+                            <div class="formula-box">
+                                <strong>Equation:</strong> 4Fe + 3O₂ + 2H₂O → 2Fe₂O₃·H₂O
+                            </div>
+                            
+                            <h4>Differences Between Physical and Chemical Changes</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>Physical Changes</th><th>Chemical Changes</th></tr>
+                                    <tr><td>Affect only physical properties</td><td>Affect both physical and chemical properties</td></tr>
+                                    <tr><td>Temporary changes</td><td>Permanent changes</td></tr>
+                                    <tr><td>Easily reversible</td><td>Irreversible</td></tr>
+                                    <tr><td>No new substance formed</td><td>New substances formed</td></tr>
+                                    <tr><td>Molecules rearranged, composition same</td><td>Molecular compositions completely change</td></tr>
+                                    <tr><td>No energy produced or absorbed</td><td>Energy produced or absorbed</td></tr>
+                                </table>
+                            </div>
+                        `
+                    }
+                ]
+            },
+            {
+                id: 5,
+                title: "ELEMENTS, COMPOUNDS AND MIXTURES",
+                topics: [
+                    {
+                        number: "5.1",
+                        title: "Elements and Chemical Symbols",
+                        content: `
+                            <div class="definition-box">
+                                <strong>Definition of Element</strong><br>
+                                An element is a pure chemical substance which cannot be split into simpler substances by a simple chemical process.
+                            </div>
+                            
+                            <h4>Number of Elements</h4>
+                            <p>118 known chemical elements. Most occur naturally. Few are man-made.</p>
+                            
+                            <h4>Examples of Common Elements</h4>
+                            <p>Sodium (Na), Potassium (K), Magnesium (Mg), Sulfur (S), Carbon (C), Iron (Fe), Silver (Ag), Gold (Au), Copper (Cu), Oxygen (O), Nitrogen (N), Hydrogen (H)</p>
+                            
+                            <h4>Chemical Symbols</h4>
+                            <p><strong>Definition:</strong> Abbreviations or short representations of element names</p>
+                            <p><strong>Origin:</strong> Often derived from Latin or Greek names</p>
+                            <p><strong>Rules:</strong></p>
+                            <ul>
+                                <li>First letter must be capital</li>
+                                <li>Second letter (if any) must be small</li>
+                            </ul>
+                            
+                            <h4>Criteria for Assigning Chemical Symbols</h4>
+                            
+                            <h5>1. First letter of English name</h5>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>Element</th><th>Symbol</th><th>Element</th><th>Symbol</th></tr>
+                                    <tr><td>Boron</td><td>B</td><td>Carbon</td><td>C</td></tr>
+                                    <tr><td>Fluorine</td><td>F</td><td>Hydrogen</td><td>H</td></tr>
+                                    <tr><td>Iodine</td><td>I</td><td>Nitrogen</td><td>N</td></tr>
+                                    <tr><td>Oxygen</td><td>O</td><td>Phosphorus</td><td>P</td></tr>
+                                    <tr><td>Sulfur</td><td>S</td><td></td><td></td></tr>
+                                </table>
+                            </div>
+                            
+                            <h5>2. Two letters from English name (when first letters are same)</h5>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>Element</th><th>Symbol</th><th>Element</th><th>Symbol</th></tr>
+                                    <tr><td>Aluminium</td><td>Al</td><td>Argon</td><td>Ar</td></tr>
+                                    <tr><td>Calcium</td><td>Ca</td><td>Chlorine</td><td>Cl</td></tr>
+                                    <tr><td>Cobalt</td><td>Co</td><td>Magnesium</td><td>Mg</td></tr>
+                                    <tr><td>Silicon</td><td>Si</td><td>Beryllium</td><td>Be</td></tr>
+                                </table>
+                            </div>
+                            
+                            <h5>3. Derived from Latin names</h5>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>Element</th><th>Latin Name</th><th>Symbol</th></tr>
+                                    <tr><td>Antimony</td><td>Stibium</td><td>Sb</td></tr>
+                                    <tr><td>Copper</td><td>Cuprum</td><td>Cu</td></tr>
+                                    <tr><td>Gold</td><td>Aurum</td><td>Au</td></tr>
+                                    <tr><td>Iron</td><td>Ferum</td><td>Fe</td></tr>
+                                    <tr><td>Lead</td><td>Plumbum</td><td>Pb</td></tr>
+                                    <tr><td>Mercury</td><td>Hydrargyrum</td><td>Hg</td></tr>
+                                    <tr><td>Potassium</td><td>Kalium</td><td>K</td></tr>
+                                    <tr><td>Silver</td><td>Argentum</td><td>Ag</td></tr>
+                                    <tr><td>Sodium</td><td>Natrium</td><td>Na</td></tr>
+                                    <tr><td>Tin</td><td>Stannum</td><td>Sn</td></tr>
+                                    <tr><td>Tungsten</td><td>Wolfram</td><td>W</td></tr>
+                                </table>
+                            </div>
+                            
+                            <h4>Importance of Chemical Symbols</h4>
+                            <ul>
+                                <li>Quickly understand elements being referred to instead of memorising full names</li>
+                                <li>Write chemical equations in abbreviated forms</li>
+                                <li>Distinguish one element from another</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        number: "5.2",
+                        title: "Metals and Non-metals",
+                        content: `
+                            <h4>Periodic Table</h4>
+                            <p>Systematic method to represent and organise chemical elements in a table format.</p>
+                            <p><strong>Position of Metals:</strong> Left hand side and middle of Periodic Table</p>
+                            <p><strong>Position of Non-metals:</strong> Upper right-hand portion of Periodic Table</p>
+                            
+                            <h4>Characteristics of Metals vs Non-metals</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>S/N</th><th>Metals</th><th>Non-metals</th></tr>
+                                    <tr><td>1</td><td>Good conductors of electricity</td><td>Poor conductors (insulators)</td></tr>
+                                    <tr><td>2</td><td>Good conductors of heat</td><td>Poor conductors of heat</td></tr>
+                                    <tr><td>3</td><td>High melting and boiling points</td><td>Low melting and boiling points</td></tr>
+                                    <tr><td>4</td><td>High tensile strength</td><td>Low tensile strength</td></tr>
+                                    <tr><td>5</td><td>Sonorous (produce metallic sound)</td><td>Not sonorous</td></tr>
+                                    <tr><td>6</td><td>Ductile (can be drawn into thin wires)</td><td>Not ductile</td></tr>
+                                    <tr><td>7</td><td>Malleable (can be hammered into thin sheets)</td><td>Not malleable</td></tr>
+                                    <tr><td>8</td><td>Lustrous (shining surfaces when cut)</td><td>Non-lustrous (except diamond)</td></tr>
+                                </table>
+                            </div>
+                            
+                            <h4>Exceptions</h4>
+                            <p><strong>Metals with different characteristics:</strong></p>
+                            <ul>
+                                <li>Sodium, potassium, mercury - light with very low melting/boiling points</li>
+                                <li>Mercury - liquid at room temperature</li>
+                            </ul>
+                            <p><strong>Non-metals with different characteristics:</strong></p>
+                            <ul>
+                                <li>Diamond - very high melting/boiling point</li>
+                                <li>Graphite - good conductor of heat and electricity</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        number: "5.3",
+                        title: "Compounds and Mixtures",
+                        content: `
+                            <h4>Compounds</h4>
+                            <p><strong>Definition:</strong> A pure substance made up of two or more elements in a chemical combination</p>
+                            
+                            <h4>Binary Compounds</h4>
+                            <p><strong>Definition:</strong> Compound made up of two components</p>
+                            
+                            <h4>Examples:</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>First Part</th><th>Second Part</th><th>Compound</th></tr>
+                                    <tr><td>Sulfur</td><td>Oxygen</td><td>Sulfur dioxide</td></tr>
+                                    <tr><td>Sodium</td><td>Chlorine</td><td>Sodium chloride (common salt)</td></tr>
+                                    <tr><td>Hydrogen</td><td>Oxygen</td><td>Water</td></tr>
+                                    <tr><td>Nitrogen</td><td>Hydrogen</td><td>Ammonia</td></tr>
+                                    <tr><td>Zinc</td><td>Sulfur</td><td>Zinc sulfide</td></tr>
+                                </table>
+                            </div>
+                            
+                            <h4>Properties of Binary Compounds</h4>
+                            <ul>
+                                <li>Components have different properties from resulting compound</li>
+                                <li>Example: NaCl (white solid) from greenish-yellow chlorine gas and silvery soft sodium metal</li>
+                                <li>Substances combine in definite proportions</li>
+                                <li>Formed only by chemical reaction (energy taken in or given out)</li>
+                                <li>Components separated only by chemical means (not physical)</li>
+                            </ul>
+                            
+                            <h4>Mixtures</h4>
+                            <p><strong>Definition:</strong> A physical combination of two or more substances in any ratio</p>
+                            
+                            <h4>Types of Mixtures:</h4>
+                            <ul>
+                                <li><strong>Homogeneous:</strong> Uniform composition, appearance and properties (e.g., Salt dissolved in water)</li>
+                                <li><strong>Heterogeneous:</strong> Different composition, appearance and properties at various points (e.g., Sulfur and iron filings)</li>
+                            </ul>
+                            
+                            <h4>Examples of Mixtures:</h4>
+                            <ul>
+                                <li>Liquid-liquid: oil and water</li>
+                                <li>Solid-liquid: muddy water</li>
+                                <li>Solid-solid: sand and salt</li>
+                            </ul>
+                            
+                            <h4>Differences Between Elements and Compounds</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>S/N</th><th>Elements</th><th>Compounds</th></tr>
+                                    <tr><td>1</td><td>Cannot be separated into simpler substances</td><td>Components separated by chemical means</td></tr>
+                                    <tr><td>2</td><td>Made up of similar atoms of same type</td><td>Made up of two or more different substances</td></tr>
+                                    <tr><td>3</td><td>Maintain characteristics when in mixtures</td><td>Different characteristics from components</td></tr>
+                                    <tr><td>4</td><td>Contain unique atomic numbers</td><td>Varying total atomic numbers</td></tr>
+                                    <tr><td>5</td><td>Symbols represent elements</td><td>Chemical formula represents compound</td></tr>
+                                </table>
+                            </div>
+                            
+                            <h4>Differences Between Mixtures and Compounds</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>S/N</th><th>Mixture</th><th>Compound</th></tr>
+                                    <tr><td>1</td><td>Components separated by physical methods</td><td>Components separated by chemical methods</td></tr>
+                                    <tr><td>2</td><td>May vary widely in composition, any proportions</td><td>Definite/fixed compositions by mass, fixed proportions</td></tr>
+                                    <tr><td>3</td><td>No chemical change when formed</td><td>Chemical changes involved when formed</td></tr>
+                                    <tr><td>4</td><td>Properties are those of individual components</td><td>Properties very different from individual elements</td></tr>
+                                </table>
+                            </div>
+                        `
+                    },
+                    {
+                        number: "5.4",
+                        title: "Solutions, Suspensions and Emulsions",
+                        content: `
+                            <h4>Solutions</h4>
+                            <p><strong>Definition:</strong> A homogeneous mixture of two or more substances (solvent and solute)</p>
+                            
+                            <h4>Terms:</h4>
+                            <ul>
+                                <li><strong>Solvent:</strong> Component that dissolves the solute, usually present in large amount</li>
+                                <li><strong>Solute:</strong> Component that is dissolved in the solvent, usually present in small amount</li>
+                            </ul>
+                            
+                            <h4>Types of Solutions</h4>
+                            <ul>
+                                <li><strong>Unsaturated:</strong> Solvent can dissolve more solute at given temperature and pressure</li>
+                                <li><strong>Saturated:</strong> Solvent can dissolve no more solute at given temperature and pressure</li>
+                                <li><strong>Supersaturated:</strong> Holds more solute than maximum amount at given temperature and pressure</li>
+                            </ul>
+                            <p><em>Note: Saturation depends on temperature. As temperature increases, kinetic energy increases, creating more space for dissolving more solute.</em></p>
+                            
+                            <h4>Solutions in Three States of Matter</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>Solute</th><th>Solvent</th><th>Examples</th></tr>
+                                    <tr><td>Solid</td><td>Gas</td><td>Naphthalene in air</td></tr>
+                                    <tr><td>Solid</td><td>Liquid</td><td>Sugar in water, salt in water</td></tr>
+                                    <tr><td>Solid</td><td>Solid</td><td>Steel and other metal alloys</td></tr>
+                                    <tr><td>Liquid</td><td>Gas</td><td>Water in air</td></tr>
+                                    <tr><td>Liquid</td><td>Liquid</td><td>Ethanol in water, petroleum</td></tr>
+                                    <tr><td>Liquid</td><td>Solid</td><td>Mercury in gold, hexane in paraffin wax</td></tr>
+                                    <tr><td>Gas</td><td>Gas</td><td>Oxygen and other gases in air</td></tr>
+                                    <tr><td>Gas</td><td>Liquid</td><td>Carbon dioxide in water (carbonated water)</td></tr>
+                                    <tr><td>Gas</td><td>Solid</td><td>Hydrogen in metals</td></tr>
+                                </table>
+                            </div>
+                            
+                            <h4>Applications of Saturation</h4>
+                            <ul>
+                                <li>Separating certain mixtures in laboratories</li>
+                                <li>Extracting minerals (e.g., common salt from sea water)</li>
+                                <li>Cooking and salting food</li>
+                                <li>Using detergent during laundry</li>
+                                <li>Dissolving sugar in tea</li>
+                            </ul>
+                            
+                            <h4>Uses of Solvents</h4>
+                            <ul>
+                                <li>Cleaning (form solution with dirt)</li>
+                                <li>Varnish removal</li>
+                                <li>Stain removal</li>
+                                <li>Bleaching</li>
+                                <li>Thinning paints</li>
+                                <li>Degreasing</li>
+                                <li>Chemical synthesis (manufacturing)</li>
+                            </ul>
+                            <p>Water is most common solvent</p>
+                            
+                            <h4>Suspensions</h4>
+                            <p><strong>Definition:</strong> A heterogeneous mixture of a liquid (solvent) and fine particles of a solid. Solute particles do not dissolve but get suspended.</p>
+                            <p><strong>Characteristics:</strong></p>
+                            <ul>
+                                <li>Particles settle down when undisturbed</li>
+                                <li>Become visible after settling</li>
+                            </ul>
+                            <p><strong>Examples:</strong> Muddy water, Blood, Sand particles in water, Chalk powder in water, Medicines (syrups), Body sprays, Insecticides</p>
+                            <p><strong>Aerosols:</strong> Suspensions of liquid droplets or fine solid particles floating in gas</p>
+                            
+                            <h4>Differences Between Solutions and Suspensions</h4>
+                            <div class="table-container">
+                                <table>
+                                    <tr><th>S/N</th><th>Solutions</th><th>Suspensions</th></tr>
+                                    <tr><td>1</td><td>Homogeneous mixtures</td><td>Heterogeneous mixtures</td></tr>
+                                    <tr><td>2</td><td>Transparent/clear</td><td>Opaque/not clear</td></tr>
+                                    <tr><td>3</td><td>Solute particles completely dissolved</td><td>Solute particles settle if undisturbed</td></tr>
+                                    <tr><td>4</td><td>Separated by evaporation</td><td>Separated by filtration</td></tr>
+                                </table>
+                            </div>
+                            
+                            <h4>Emulsions</h4>
+                            <p><strong>Definition:</strong> A mixture of liquids that do not completely mix with each other</p>
+                            
+                            <h4>Terms:</h4>
+                            <ul>
+                                <li><strong>Immiscible:</strong> Liquids that do not mix</li>
+                                <li><strong>Miscible:</strong> Liquids that mix</li>
+                            </ul>
+                            
+                            <h4>Formation:</h4>
+                            <ul>
+                                <li>Usually from two liquids: water-based and oil-based</li>
+                                <li>When shaken, oily liquid forms droplets suspended in water-based liquid</li>
+                                <li>Harder shaking = smaller droplets = may appear homogeneous</li>
+                            </ul>
+                            
+                            <h4>Examples:</h4>
+                            <ul>
+                                <li>Milk (drops of butterfat in water)</li>
+                                <li>Emulsion paint (drops of coloured oils in water)</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        number: "5.5",
+                        title: "Separation of Mixtures",
+                        content: `
+                            <h4>Principles of Separation</h4>
+                            <ul>
+                                <li>Many mixtures contain useful substances mixed with unwanted materials (impurities)</li>
+                                <li>Separation method depends on components and their properties</li>
+                            </ul>
+                            
+                            <h4>1. Decantation</h4>
+                            <p><strong>Definition:</strong> Process of separating a heterogeneous mixture of liquid and solid by pouring out the liquid only, leaving solid at bottom</p>
+                            <p><strong>Process:</strong></p>
+                            <ul>
+                                <li>Sedimentation - components settle at bottom first</li>
+                                <li>Pour out clear water from top</li>
+                            </ul>
+                            <p><strong>Works best when:</strong> Solid particles are large</p>
+                            <p><strong>Example:</strong> Separating clear water from muddy water</p>
+                            
+                            <h4>2. Filtration</h4>
+                            <p><strong>Definition:</strong> Method to separate heterogeneous mixture of solid and liquid using porous filter</p>
+                            <p><strong>Components:</strong></p>
+                            <ul>
+                                <li><strong>Residue</strong> - solid obtained</li>
+                                <li><strong>Filtrate</strong> - liquid obtained</li>
+                            </ul>
+                            <p><strong>Example:</strong> Separating sand from water</p>
+                            
+                            <h4>3. Evaporation</h4>
+                            <p><strong>Definition:</strong> Process of separating solute from liquid solution through heating</p>
+                            <p><strong>Process:</strong></p>
+                            <ul>
+                                <li>Solvent converts from liquid to gas through heating</li>
+                                <li>Solute remains as residue</li>
+                            </ul>
+                            <p><strong>Example:</strong> Obtaining salt from salt solution</p>
+                            
+                            <h4>4. Distillation</h4>
+                            <p><strong>Definition:</strong> Process of separating components by heating a liquid to suitable temperature until it forms vapour, then cooling back to liquid</p>
+                            <p><strong>Distillate:</strong> Liquid from cooled vapour</p>
+                            
+                            <h5>Types:</h5>
+                            <p><strong>a) Simple Distillation</strong></p>
+                            <ul>
+                                <li>Obtaining a single liquid from suspension or solution</li>
+                                <li>Example: distilling clean water from muddy water</li>
+                            </ul>
+                            
+                            <p><strong>b) Fractional Distillation</strong></p>
+                            <ul>
+                                <li>Separating homogeneous mixture of two or more miscible liquids</li>
+                                <li>Uses fractionating column</li>
+                                <li>Liquids must have reasonable difference in boiling points</li>
+                                <li>Component with lower boiling point distils first</li>
+                                <li>Each component collected is a fraction</li>
+                                <li>Example: separating ethanol and water</li>
+                            </ul>
+                            
+                            <h4>5. Layer Separation</h4>
+                            <p><strong>Definition:</strong> Method for separating immiscible liquids using separating funnel</p>
+                            <p><strong>Process:</strong></p>
+                            <ul>
+                                <li>Most dense liquid settles at bottom</li>
+                                <li>Least dense remains at top</li>
+                                <li>Open tap, bottom liquid released first</li>
+                            </ul>
+                            <p><strong>Example:</strong> Separating kerosene from water, oil from water</p>
+                            
+                            <h4>6. Sublimation</h4>
+                            <p><strong>Definition:</strong> Process where solid changes directly to gas on heating</p>
+                            <p><strong>Sublimate:</strong> Solid that forms when vapour cools</p>
+                            <p><strong>Used when:</strong> One substance in mixture sublimes</p>
+                            <p><strong>Examples:</strong> Iodine, ammonium chloride</p>
+                            
+                            <h4>7. Chromatography</h4>
+                            <p><strong>Definition:</strong> Process of separating mixtures using a solvent (mobile phase) and an immobile substance (stationary phase)</p>
+                            
+                            <h5>Terms:</h5>
+                            <ul>
+                                <li><strong>Mobile phase:</strong> moving solvent (liquid or gas)</li>
+                                <li><strong>Stationary phase:</strong> immobile substance (solid or liquid on solid)</li>
+                                <li><strong>Analyte:</strong> substance being separated</li>
+                            </ul>
+                            
+                            <h5>Types:</h5>
+                            <ul>
+                                <li>Paper chromatography</li>
+                                <li>Thin layer chromatography</li>
+                                <li>Gas chromatography</li>
+                            </ul>
+                            
+                            <h5>Paper Chromatography:</h5>
+                            <ul>
+                                <li>Stationary phase: uniform adsorbent paper</li>
+                                <li>Mobile phase: suitable liquid solvent</li>
+                            </ul>
+                            
+                            <h5>Uses of Chromatography:</h5>
+                            <ul>
+                                <li>Separate components of mixture</li>
+                                <li>Identification and quantification of chemical substances</li>
+                                <li>Analyse drugs in blood and urine samples</li>
+                                <li>Detect causes of pollution in water, soil, air and organisms</li>
+                            </ul>
+                            
+                            <h4>8. Solvent Extraction</h4>
+                            <p><strong>Definition:</strong> Separation of compounds from materials using liquids in which they are soluble</p>
+                            
+                            <h5>Criteria for Solvent Selection:</h5>
+                            <ul>
+                                <li>Solvent should dissolve component of interest</li>
+                                <li>Solvent must not react with component of interest</li>
+                                <li>Solution formed must allow easy separation of desired component</li>
+                            </ul>
+                            
+                            <p><strong>Example:</strong> Extracting oil from groundnuts using ethanol, then fractional distillation to separate ethanol from oil</p>
+                        `
+                    }
+                ]
+            }
+        ];
+
+        // Render chapters
+        function renderChapters() {
+            const grid = document.getElementById('chaptersGrid');
+            let html = '';
+            
+            chapters.forEach(chapter => {
+                html += `
+                    <div class="chapter-card" onclick="openChapter(${chapter.id})">
+                        <div class="chapter-number">CHAPTER ${chapter.id}</div>
+                        <h3>${chapter.title}</h3>
+                        <p>${chapter.topics.length} topics • Complete notes</p>
+                        <span class="topic-count">View Chapter →</span>
+                    </div>
+                `;
+            });
+            
+            grid.innerHTML = html;
+        }
+
+        // Open chapter
+        function openChapter(id) {
+            const chapter = chapters.find(c => c.id === id);
+            
+            document.getElementById('modalTitle').textContent = `CHAPTER ${id}: ${chapter.title}`;
+            document.getElementById('modalInfo').textContent = `${chapter.topics.length} topics • Based on TIE Student's Book Form One`;
+            
+            let html = '';
+            
+            chapter.topics.forEach(topic => {
+                html += `
+                    <div class="topic">
+                        <h3>${topic.number} ${topic.title}</h3>
+                        ${topic.content}
+                    </div>
+                `;
+            });
+            
+            document.getElementById('modalBody').innerHTML = html;
+            document.getElementById('chapterModal').classList.add('active');
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('chapterModal').classList.remove('active');
+        }
+
+        // Open AI chat (placeholder)
+        function openAIChat() {
+            alert('KRYNOX42 AI Chat itaongezwa hivi karibuni! Kwa sasa unaweza kusoma notes zote za chemistry.');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('chapterModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Initialize
+        renderChapters();
+    </script>
+</body>
+</html>
